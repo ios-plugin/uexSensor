@@ -12,9 +12,14 @@
 @class EUExSensor;
 @interface Sensor : NSObject <CLLocationManagerDelegate>{
 	CMMotionManager *motionManager;
-	EUExSensor *euexObj;
+	
 	CLLocationManager *gpsManager;
 }
+
+@property (nonatomic, assign) EUExSensor * euexObj;
+
+
+
 -(void)initSensorWithUExObj:(EUExSensor *)euexObj_;
 -(void)openMotation;
 -(void)openMagnetic;
