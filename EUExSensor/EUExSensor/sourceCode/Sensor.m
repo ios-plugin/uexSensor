@@ -9,9 +9,7 @@
 #import "Sensor.h"
 #import "EUExSensor.h"
 @implementation Sensor
--(void)initSensorWithUExObj:(EUExSensor *)euexObj_ {
-	 euexObj = euexObj_;
-}
+
 
 -(void)openMotation{
  
@@ -40,7 +38,10 @@
 	float y = [[array objectAtIndex:1] floatValue];
 	float z = [[array objectAtIndex:2] floatValue];
 	PluginLog(@"x,y,z = %f---%f---%f",x,y,z);
-	[euexObj uexSensorWithType:F_SENSOR_TYPE_ACCELEROMETER sensorX:x*10 sensorY:y*10 sensorZ:z*10];
+    
+    if ([_euexObj isKindOfClass:[EUExSensor class]] && [_euexObj respondsToSelector:@selector(uexSensorWithType:sensorX:sensorY:sensorZ:)]) {
+        [_euexObj uexSensorWithType:F_SENSOR_TYPE_ACCELEROMETER sensorX:x*10 sensorY:y*10 sensorZ:z*10];
+    }
 }
 -(void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
 {	
@@ -48,7 +49,9 @@
 	NSString *yStr = [NSString stringWithFormat:@"%f",newHeading.y];
 	NSString *zStr = [NSString stringWithFormat:@"%f",newHeading.z];
  	PluginLog(@"x,y,z:%@\n%@\n%@",xStr,yStr,zStr);
-	[euexObj uexSensorWithType:F_SENSOR_TYPE_MAGNETIC_FIELD sensorX:newHeading.x sensorY:newHeading.y sensorZ:newHeading.z];
+    if (_euexObj && [_euexObj respondsToSelector:@selector(uexSensorWithType:sensorX:sensorY:sensorZ:)]) {
+        [_euexObj uexSensorWithType:F_SENSOR_TYPE_MAGNETIC_FIELD sensorX:newHeading.x sensorY:newHeading.y sensorZ:newHeading.z];
+    }
 }
 -(void)openMagnetic{
 	if (gpsManager) {
@@ -80,14 +83,10 @@
 	[self closeAccelerSensor];
 }
 -(void)dealloc{
-	if (motionManager) {
-		[motionManager release];
-		motionManager=nil;
-	}
-	if (gpsManager) {
-		[gpsManager release];
-		gpsManager = nil;
-	}
+    if (_euexObj) {
+        _euexObj = nil;
+    }
+	[self closeAllSensor];
     [super dealloc];
 }
 @end

@@ -15,7 +15,7 @@
 -(id)initWithBrwView:(EBrowserView *) eInBrwView{	
 	if (self = [super initWithBrwView:eInBrwView]) {
 		sensorObj = [[Sensor alloc] init];
-		[sensorObj initSensorWithUExObj:self];
+        sensorObj.euexObj = self;
 	}
 	return self;
 }
@@ -23,10 +23,7 @@
 -(void)dealloc{
 	PluginLog(@"EUExSensor retain count is %d",[self retainCount]);
 	PluginLog(@"EUExSensor dealloc is %x", self);
-	if (sensorObj) {
-		[sensorObj release];
-		sensorObj = nil;
-	}
+    [self clean];
 	[super dealloc];
 }
 
@@ -122,6 +119,8 @@
 -(void)clean{
 	if (sensorObj) {
 		[sensorObj closeAllSensor];
+        [sensorObj release];
+        sensorObj = nil;
 	}
 }
 
