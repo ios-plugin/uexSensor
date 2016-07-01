@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2127A5901D24F00B00134EFB /* AppCanKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2127A58F1D24F00B00134EFB /* AppCanKit.framework */; };
 		5A8D11E4188FD2A80000F38B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A8D11E3188FD2A80000F38B /* Foundation.framework */; };
 		5A8D11EB188FD2A80000F38B /* EUExSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8D11EA188FD2A80000F38B /* EUExSensor.m */; };
 		5A8D1210188FD2F10000F38B /* Sensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8D120F188FD2F10000F38B /* Sensor.m */; };
@@ -25,12 +26,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2127A58F1D24F00B00134EFB /* AppCanKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppCanKit.framework; sourceTree = "<group>"; };
 		3C76C47818AB6E5A00BBE8D1 /* EUExSensor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EUExSensor.h; sourceTree = "<group>"; };
 		5A8D11E0188FD2A80000F38B /* libuexSensor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libuexSensor.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A8D11E3188FD2A80000F38B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5A8D11E7188FD2A80000F38B /* EUExSensor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EUExSensor-Prefix.pch"; sourceTree = "<group>"; };
 		5A8D11EA188FD2A80000F38B /* EUExSensor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EUExSensor.m; sourceTree = "<group>"; };
-		5A8D120A188FD2F10000F38B /* EUExBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBase.h; sourceTree = "<group>"; };
 		5A8D120B188FD2F10000F38B /* EUExBaseDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBaseDefine.h; sourceTree = "<group>"; };
 		5A8D120C188FD2F10000F38B /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUtility.h; sourceTree = "<group>"; };
 		5A8D120E188FD2F10000F38B /* Sensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sensor.h; sourceTree = "<group>"; };
@@ -42,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2127A5901D24F00B00134EFB /* AppCanKit.framework in Frameworks */,
 				5A8D11E4188FD2A80000F38B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,7 +99,6 @@
 		5A8D1209188FD2F10000F38B /* engineHeader */ = {
 			isa = PBXGroup;
 			children = (
-				5A8D120A188FD2F10000F38B /* EUExBase.h */,
 				5A8D120B188FD2F10000F38B /* EUExBaseDefine.h */,
 				5A8D120C188FD2F10000F38B /* EUtility.h */,
 			);
@@ -107,6 +108,7 @@
 		5A8D120D188FD2F10000F38B /* sourceCode */ = {
 			isa = PBXGroup;
 			children = (
+				2127A58F1D24F00B00134EFB /* AppCanKit.framework */,
 				5A8D120E188FD2F10000F38B /* Sensor.h */,
 				5A8D120F188FD2F10000F38B /* Sensor.m */,
 			);
@@ -248,6 +250,10 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/uexSensor/";
 				DSTROOT = /tmp/EUExSensor.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EUExSensor/sourceCode",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EUExSensor/EUExSensor-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
@@ -262,6 +268,10 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/uexSensor/";
 				DSTROOT = /tmp/EUExSensor.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EUExSensor/sourceCode",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EUExSensor/EUExSensor-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";

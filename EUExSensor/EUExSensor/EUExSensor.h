@@ -6,7 +6,7 @@
 //  Copyright 2011 3g2win. All rights reserved.
 //
 
-#import "EUExBase.h"
+
 #import "Sensor.h"
 
 enum uexSensorTypesID {

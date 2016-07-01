@@ -20,7 +20,7 @@
 
 
 
--(void)initSensorWithUExObj:(EUExSensor *)euexObj_;
+//-(void)initSensorWithUExObj:(EUExSensor *)euexObj_;
 -(void)openMotation;
 -(void)openMagnetic;
 -(void)closeMagneticSensor;

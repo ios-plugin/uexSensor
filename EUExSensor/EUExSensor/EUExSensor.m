@@ -12,14 +12,20 @@
 
 @implementation EUExSensor
 
--(id)initWithBrwView:(EBrowserView *) eInBrwView{	
-	if (self = [super initWithBrwView:eInBrwView]) {
-		sensorObj = [[Sensor alloc] init];
+//-(id)initWithBrwView:(EBrowserView *) eInBrwView{	
+//	if (self = [super initWithBrwView:eInBrwView]) {
+//		sensorObj = [[Sensor alloc] init];
+//        sensorObj.euexObj = self;
+//	}
+//	return self;
+//}
+-(id)initWithWebViewEngine:(id<AppCanWebViewEngineObject>)engine{
+    if (self = [super initWithWebViewEngine:engine]) {
+        sensorObj = [[Sensor alloc] init];
         sensorObj.euexObj = self;
-	}
-	return self;
+    }
+    return self;
 }
-
 -(void)dealloc{
 	PluginLog(@"EUExSensor retain count is %d",[self retainCount]);
 	PluginLog(@"EUExSensor dealloc is %x", self);
@@ -99,21 +105,23 @@
 }
 
 -(void)uexSensorWithType:(int)inType sensorX:(float)inSensorX sensorY:(float)inSensorY sensorZ:(float)inSensorZ {
-	NSString *jsStr = nil;
+	//NSString *jsStr = nil;
 	switch (inType) {
 		case F_SENSOR_TYPE_ACCELEROMETER:
-			jsStr = [NSString stringWithFormat:@"if(uexSensor.onAccelerometerChange !=null){uexSensor.onAccelerometerChange(%f,%f,%f)}",inSensorX,inSensorY,inSensorZ];
+			//jsStr = [NSString stringWithFormat:@"if(uexSensor.onAccelerometerChange !=null){uexSensor.onAccelerometerChange(%f,%f,%f)}",inSensorX,inSensorY,inSensorZ];
+        [self.webViewEngine callbackWithFunctionKeyPath:@"uexSensor.onAccelerometerChange" arguments:ACArgsPack(@(inSensorX),@(inSensorY),@(inSensorZ))];
 			break;
 		case F_SENSOR_TYPE_MAGNETIC_FIELD:
-			jsStr = [NSString stringWithFormat:@"if(uexSensor.onMagneticChange !=null){uexSensor.onMagneticChange(%f,%f,%f)}",inSensorX,inSensorY,inSensorZ];
+			//jsStr = [NSString stringWithFormat:@"if(uexSensor.onMagneticChange !=null){uexSensor.onMagneticChange(%f,%f,%f)}",inSensorX,inSensorY,inSensorZ];
+        [self.webViewEngine callbackWithFunctionKeyPath:@"uexSensor.onMagneticChange" arguments:ACArgsPack(@(inSensorX),@(inSensorY),@(inSensorZ))];
 			break;
 		default:
-			[self jsFailedWithOpId:0 errorCode:1170108 errorDes:UEX_ERROR_DESCRIBE_DEVICE_SUPPORT];
+			//[self jsFailedWithOpId:0 errorCode:1170108 errorDes:UEX_ERROR_DESCRIBE_DEVICE_SUPPORT];
 			break;
 	}
-	//NSString *jsStr = [NSString stringWithFormat:@"if(uex.onMagneticChange !=null){uex.cbSensorOnChange(%f,%f,%f)}",inType,inSensorX,inSensorY,inSensorZ];
-	PluginLog(@"jsstr=%@",jsStr);
-	[meBrwView stringByEvaluatingJavaScriptFromString:jsStr];
+	//PluginLog(@"jsstr=%@",jsStr);
+	//[meBrwView stringByEvaluatingJavaScriptFromString:jsStr];
+    //[self.webViewEngine callbackWithFunctionKeyPath:@"" arguments:ACArgsPack(@(inSensorX),@(inSensorY),@(inSensorZ))];
 }
 
 -(void)clean{

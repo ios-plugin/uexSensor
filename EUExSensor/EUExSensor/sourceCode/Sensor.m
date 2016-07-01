@@ -61,7 +61,7 @@
 	gpsManager.delegate = self;
 	gpsManager.desiredAccuracy = kCLLocationAccuracyBest;
 	gpsManager.distanceFilter = kCLDistanceFilterNone;
-//	gpsManager.headingFilter = 2.0f;       //设置此变量试试？
+	//gpsManager.headingFilter = 2.0f;       //设置此变量试试？
 	[gpsManager startUpdatingHeading];
 }
 -(void)closeAccelerSensor{
