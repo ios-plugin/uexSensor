@@ -52,7 +52,12 @@
 				break;
 			case F_SENSOR_TYPE_MAGNETIC_FIELD:{ //操作
 				if (sensorObj) {
-					 [sensorObj openMagnetic];
+                    if([self checkDevice:@"iPod"]){
+                        [self.webViewEngine callbackWithFunctionKeyPath:@"uexSensor.onMagneticChange" arguments:ACArgsPack(@(-1),@(-1),@(-1))];
+                    }else{
+                       [sensorObj openMagnetic]; 
+                    }
+					 
 				}
 				break;
 			}
@@ -70,7 +75,14 @@
 		}
 	}
 }
-
+-(BOOL)checkDevice:(NSString*)name
+{
+    NSString* deviceType = [UIDevice currentDevice].model;
+    NSLog(@"deviceType = %@", deviceType);
+    
+    NSRange range = [deviceType rangeOfString:name];
+    return range.location != NSNotFound;
+}
 -(void)close:(NSMutableArray *)inArguments {
 	PluginLog(@"[EUExSensor close]");
 	NSString *inType = [inArguments objectAtIndex:0];
