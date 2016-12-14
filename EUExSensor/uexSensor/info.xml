@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
-    <plugin
-        uexName="uexSensor" version="4.0.0" build="0">
+    <plugin uexName="uexSensor" version="4.0.0" build="0">
         <info>0:uexSensor支持引擎4.0</info>
     </plugin>
 </uexplugins>
